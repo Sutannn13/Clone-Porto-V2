@@ -129,11 +129,13 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const { nodes, materials } = useGLTF(cardGLB) as any;
-    const bandTexture = useTexture(lanyardBand);
 
-    // Load card texture FRESH (bypass drei global cache) so repeat mutations work reliably
+    // Load textures via Suspense logic natively, then clone for the card to mutate UV scaling
+    const bandTexture = useTexture(lanyardBand);
+    const cardTextureSource = useTexture(idCardTexture);
+
     const cardTexture = useMemo(() => {
-        const tex = new THREE.TextureLoader().load(idCardTexture);
+        const tex = cardTextureSource.clone();
         tex.colorSpace = THREE.SRGBColorSpace;
         // Fix horizontal mirror: flip U axis
         tex.wrapS = THREE.RepeatWrapping;
@@ -142,7 +144,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         tex.offset.set(1, 0);    // shift back so it's in [0,1]
         tex.needsUpdate = true;
         return tex;
-    }, []);
+    }, [cardTextureSource]);
 
     // Build a stylish back-of-card canvas texture
     const backTexture = useMemo(() => {
@@ -416,7 +418,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
                     resolution={isMobile ? [1000, 2000] : [1000, 1000]}
                     useMap
                     map={bandTexture}
-                    repeat={[-4, 1]}
+                    repeat={[4, 1]}
                     lineWidth={1}
                 />
             </mesh>
