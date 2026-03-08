@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, Mail, MapPin, CheckCircle } from 'lucide-react';
 import SplitText from '@/components/reactbits/SplitText';
+import confetti from 'canvas-confetti';
+import { LoaderOne } from '@/components/ui/loader';
 import type { PersonalInfo } from '@/types';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,6 +18,7 @@ const Contact: React.FC<ContactProps> = ({ personal }) => {
     const formRef = useRef<HTMLDivElement>(null);
     const infoRef = useRef<HTMLDivElement>(null);
     const [submitted, setSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -63,6 +66,7 @@ const Contact: React.FC<ContactProps> = ({ personal }) => {
         const emailInput = document.getElementById('contact-email') as HTMLInputElement;
         const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
 
+        setIsLoading(true);
         try {
             const response = await fetch("https://formsubmit.co/ajax/sutanarliejohan@gmail.com", {
                 method: "POST",
@@ -80,7 +84,7 @@ const Contact: React.FC<ContactProps> = ({ personal }) => {
 
             if (response.ok) {
                 setSubmitted(true);
-                form.reset(); // Mengosongkan text di form setelah berhasil dikirim
+                form.reset();
                 setTimeout(() => setSubmitted(false), 3000);
             } else {
                 throw new Error("Failed to send message");
@@ -88,7 +92,23 @@ const Contact: React.FC<ContactProps> = ({ personal }) => {
         } catch (error) {
             console.error(error);
             alert("Maaf, terjadi kesalahan saat mengirim pesan. Coba lagi nanti.");
+        } finally {
+            setIsLoading(false);
         }
+    };
+
+    const handleConfetti = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        confetti({
+            particleCount: 75,
+            startVelocity: 35,
+            angle: 90,
+            spread: 70,
+            origin: {
+                x: (rect.left + rect.width / 2) / window.innerWidth,
+                y: (rect.top + rect.height / 2) / window.innerHeight,
+            },
+        });
     };
 
     return (
@@ -210,10 +230,13 @@ const Contact: React.FC<ContactProps> = ({ personal }) => {
                             <button
                                 type="submit"
                                 id="contact-submit"
-                                disabled={submitted}
-                                className="group mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent-dark hover:shadow-lg hover:shadow-accent/20 disabled:opacity-50"
+                                disabled={submitted || isLoading}
+                                onClick={!isLoading ? handleConfetti : undefined}
+                                className="group mt-2 inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-transparent px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10 disabled:opacity-50"
                             >
-                                {submitted ? (
+                                {isLoading ? (
+                                    <LoaderOne className="text-white" />
+                                ) : submitted ? (
                                     <>
                                         <CheckCircle size={16} />
                                         Message Sent!

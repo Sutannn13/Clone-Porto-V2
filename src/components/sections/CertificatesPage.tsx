@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { AnimatePresence, motion } from "motion/react";
+import { useOutsideClick } from "@/hooks/use-outside-click";
 import Shuffle from '@/components/reactbits/Shuffle';
 import Beams from '@/components/reactbits/Beams';
 import PillNav from '@/components/reactbits/PillNav';
-import { ExpandableCard } from '@/components/ui/expandable-card';
 import CountUp from '@/components/reactbits/CountUp';
 import GradientText from '@/components/reactbits/GradientText';
 import type { Certificate } from '@/types';
@@ -19,79 +20,79 @@ const pillNavItems = [
     { label: 'Contact', href: '#contact' },
 ];
 
+export const CloseIcon = () => {
+    return (
+        <motion.svg
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transition: { duration: 0.05 } }}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4 text-black dark:text-neutral-900"
+        >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M18 6l-12 12" />
+            <path d="M6 6l12 12" />
+        </motion.svg>
+    );
+};
+
 const CertificatesPage: React.FC<CertificatesPageProps> = ({ certificates, onClose }) => {
     const [showIntro, setShowIntro] = useState(true);
     const [introFading, setIntroFading] = useState(false);
-    const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-    const [openCardId, setOpenCardId] = useState<string | null>(null);
+
+    // Aceternity UI Expansion state
+    const [active, setActive] = useState<Certificate | boolean | null>(null);
+    const id = useId();
+    const ref = useRef<HTMLDivElement>(null);
+
+    useOutsideClick(ref, () => {
+        if (active) setActive(null)
+    });
 
     const certContent: Record<string, React.ReactNode> = {
         c1: (
-            <>
-                <p>The <strong className="text-white/90">MikroTik Certified Network Associate (MTCNA)</strong> is an internationally recognized certification validating core proficiency in RouterOS configuration and MikroTik networking products.</p>
-                <h4>Topics Covered</h4>
-                <ul className="list-disc pl-5 space-y-1">
-                    <li>RouterOS installation, licensing &amp; basic setup</li>
-                    <li>DHCP, DNS, and IP address management</li>
-                    <li>Static &amp; dynamic routing fundamentals</li>
-                    <li>Wireless networking configuration and security (WPA2/WPA3)</li>
-                    <li>Firewall rules, NAT, and packet filtering</li>
-                    <li>Tunneling protocols: PPP, PPPoE, PPTP, L2TP</li>
-                    <li>Bandwidth management &amp; traffic shaping (Queues)</li>
-                    <li>Network monitoring, logging, and troubleshooting</li>
-                </ul>
-            </>
+            <div className="space-y-2">
+                <p>The <strong>MikroTik Certified Network Associate (MTCNA)</strong> validates core proficiency in RouterOS configuration and MikroTik networking products.</p>
+                <p><strong>Topics Covered:</strong> Routing, Firewall, NAT, Tunneling, and Bandwidth Management.</p>
+            </div>
         ),
         c2: (
-            <>
-                <p>Issued by <strong className="text-white/90">Cisco Networking Academy</strong>, this certificate validates completion of the <em>Introduction to Cybersecurity</em> course — foundational knowledge for understanding cyber threats, attacks, and defense strategies.</p>
-                <h4>Topics Covered</h4>
-                <ul className="list-disc pl-5 space-y-1">
-                    <li>Common cybersecurity threats, attacks &amp; vulnerabilities</li>
-                    <li>Types of malware, phishing &amp; social engineering</li>
-                    <li>Network security fundamentals and best practices</li>
-                    <li>Protecting personal and organizational data</li>
-                    <li>Introduction to cryptography and data integrity</li>
-                    <li>Career pathways in cybersecurity</li>
-                </ul>
-            </>
+            <div className="space-y-2">
+                <p>Issued by <strong>Cisco Networking Academy</strong>, this certificate validates foundational knowledge for understanding cyber threats, attacks, and defense strategies.</p>
+                <p><strong>Topics Covered:</strong> Malware, Phishing, Network Security, and Data Protection.</p>
+            </div>
         ),
         c3: (
-            <>
-                <p>Issued by <strong className="text-white/90">Universitas Bina Sarana Informatika (UBSI)</strong> upon completion of an intensive Fullstack Web Development Bootcamp, recognized for outstanding team performance and innovation.</p>
-                <h4>Achievements</h4>
-                <ul className="list-disc pl-5 space-y-1">
-                    <li>Completed intensive training in modern fullstack web development frameworks</li>
-                    <li>Served as <strong className="text-white/90">Project Manager</strong> leading a 9-person development team</li>
-                    <li>Built <em>Trash Point</em> — a web-based waste management &amp; education application</li>
-                    <li>Achieved <strong className="text-white/90">2nd Place</strong> at the UBSI Jawa Barat IT Bootcamp competition</li>
-                </ul>
-                <h4>Tech Stack Used</h4>
-                <ul className="list-disc pl-5 space-y-1">
-                    <li>Laravel, PHP, MySQL</li>
-                    <li>Tailwind CSS, JavaScript</li>
-                    <li>RESTful API design &amp; MVC architecture</li>
-                </ul>
-            </>
+            <div className="space-y-2">
+                <p>Intensive Fullstack Web Development Bootcamp by <strong>Universitas Bina Sarana Informatika (UBSI)</strong>.</p>
+                <p><strong>Achievements:</strong> Served as Project Manager and achieved 2nd Place building <em>Trash Point</em> web application.</p>
+            </div>
         ),
         c4: (
-            <>
-                <p>Official <strong className="text-white/90">Intellectual Property Right (HKI)</strong> certificate issued by the Direktorat Jenderal Kekayaan Intelektual, Kementerian Hukum Republik Indonesia — recognizing the originality and innovation of the registered digital work.</p>
-                <h4>Registered Work</h4>
-                <ul className="list-disc pl-5 space-y-1">
-                    <li>Title: <em>Aplikasi Edukasi Dan Pengelolaan Sampah Berbasis Web (Trash Point)</em></li>
-                    <li>Registration No: <strong className="text-white/90">000946578</strong></li>
-                    <li>Issued: 25 Juni 2025, Jakarta Pusat</li>
-                    <li>Protection Period: 50 years from date of first publication</li>
-                    <li>Granted under Pasal 72 Undang-Undang No. 28 Tahun 2014 tentang Hak Cipta</li>
-                </ul>
-            </>
+            <div className="space-y-2">
+                <p>Official <strong>Intellectual Property Right (HKI)</strong> certificate issued by Direktorat Jenderal Kekayaan Intelektual RI.</p>
+                <p><strong>Registered Work:</strong> Aplikasi Edukasi Dan Pengelolaan Sampah Berbasis Web (Trash Point). Reg: <strong>000946578</strong>.</p>
+            </div>
         ),
     };
 
     useEffect(() => {
         const handleKey = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') onClose();
+            if (e.key === 'Escape') {
+                if (active && typeof active === 'object') {
+                    setActive(null);
+                } else {
+                    onClose();
+                }
+            }
         };
         document.addEventListener('keydown', handleKey);
         document.body.style.overflow = 'hidden';
@@ -100,7 +101,7 @@ const CertificatesPage: React.FC<CertificatesPageProps> = ({ certificates, onClo
             document.removeEventListener('keydown', handleKey);
             document.body.style.overflow = '';
         };
-    }, [onClose]);
+    }, [onClose, active]);
 
     const handleNavClick = (href: string) => {
         onClose();
@@ -109,6 +110,8 @@ const CertificatesPage: React.FC<CertificatesPageProps> = ({ certificates, onClo
             if (el) el.scrollIntoView({ behavior: 'smooth' });
         }, 100);
     };
+
+    const activeCard = active && typeof active === 'object' ? active : null;
 
     return createPortal(
         <>
@@ -141,7 +144,7 @@ const CertificatesPage: React.FC<CertificatesPageProps> = ({ certificates, onClo
 
             <div className={`fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden bg-[#050010] transition-opacity duration-1000 ${showIntro ? 'opacity-0' : 'opacity-100'}`}>
                 {/* ── Beams Background ── */}
-                <div className="fixed inset-0 z-0">
+                <div className="fixed inset-0 z-0 opacity-40">
                     <Beams
                         beamWidth={3}
                         beamHeight={30}
@@ -165,9 +168,9 @@ const CertificatesPage: React.FC<CertificatesPageProps> = ({ certificates, onClo
                 />
 
                 {/* Content Container */}
-                <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 md:py-20 lg:py-24">
-                    <div className="mb-12 text-center sm:mb-16 md:mb-20">
-                        <span className="mb-4 mx-auto inline-block text-[#B19EEF] font-mono text-xs uppercase tracking-[0.25em]">
+                <div className="relative z-10 mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-20 lg:py-24">
+                    <div className="mb-12 text-center sm:mb-16 md:mb-20 flex flex-col items-center gap-4">
+                        <span className="text-[#B19EEF] font-mono text-xs uppercase tracking-[0.25em]">
                             My Certificates
                         </span>
                         <Shuffle
@@ -187,38 +190,132 @@ const CertificatesPage: React.FC<CertificatesPageProps> = ({ certificates, onClo
                         />
                     </div>
 
-                    {/* Grid for ExpandableCards */}
-                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 place-items-stretch">
+                    {/* NEW ACETERNITY UI Expandable Cards List Layout */}
+                    <ul className="max-w-2xl mx-auto w-full gap-4 flex flex-col">
                         {certificates.map((cert) => (
-                            <ExpandableCard
-                                key={cert.id}
-                                title={cert.title}
-                                src={cert.imageUrl || ''}
-                                description={cert.issuer + ' · ' + cert.date}
-                                classNameExpanded="dark:[&_h4]:text-white [&_h4]:font-semibold [&_h4]:text-xl [&_h4]:mt-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1"
-                                isBlurred={
-                                    openCardId === null &&
-                                    hoveredCard !== null &&
-                                    hoveredCard !== cert.id
-                                }
-                                onOpenChange={(open) => {
-                                    setOpenCardId(open ? cert.id : null);
-                                    setHoveredCard(null);
-                                }}
-                                onMouseEnter={() => { if (!openCardId) setHoveredCard(cert.id); }}
-                                onMouseLeave={() => { if (!openCardId) setHoveredCard(null); }}
+                            <motion.div
+                                layoutId={`card-${cert.title}-${id}`}
+                                key={`card-${cert.title}-${id}`}
+                                onClick={() => setActive(cert)}
+                                className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-800 rounded-xl cursor-pointer"
                             >
-                                {certContent[cert.id] ?? (
-                                    <>
-                                        <p>{cert.title}</p>
-                                        <p>{cert.issuer} — {cert.date}</p>
-                                    </>
-                                )}
-                            </ExpandableCard>
+                                <div className="flex gap-4 flex-col md:flex-row ">
+                                    <motion.div layoutId={`image-${cert.title}-${id}`}>
+                                        <img
+                                            src={cert.imageUrl}
+                                            alt={cert.title}
+                                            className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
+                                        />
+                                    </motion.div>
+                                    <div className="">
+                                        <motion.h3
+                                            layoutId={`title-${cert.title}-${id}`}
+                                            className="font-medium text-neutral-200 text-center md:text-left"
+                                        >
+                                            {cert.title}
+                                        </motion.h3>
+                                        <motion.p
+                                            layoutId={`description-${cert.issuer}-${id}`}
+                                            className="text-neutral-400 text-center md:text-left"
+                                        >
+                                            {cert.issuer}
+                                        </motion.p>
+                                    </div>
+                                </div>
+                                <motion.button
+                                    layoutId={`button-${cert.title}-${id}`}
+                                    className="px-4 py-2 text-sm rounded-full font-bold bg-neutral-100 hover:bg-green-500 hover:text-white text-black mt-4 md:mt-0"
+                                >
+                                    Lihat
+                                </motion.button>
+                            </motion.div>
                         ))}
-                    </div>
+                    </ul>
                 </div>
             </div>
+
+            {/* EXPANDABLE OVERLAY */}
+            <AnimatePresence>
+                {activeCard && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/20 h-full w-full z-[1000]"
+                    />
+                )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {activeCard && (
+                    <div className="fixed inset-0 grid place-items-center z-[1001] px-4">
+                        <motion.button
+                            key={`button-${activeCard.title}-${id}`}
+                            layout
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0, transition: { duration: 0.05 } }}
+                            className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6 !z-[1002]"
+                            onClick={() => setActive(null)}
+                        >
+                            <CloseIcon />
+                        </motion.button>
+
+                        <motion.div
+                            layoutId={`card-${activeCard.title}-${id}`}
+                            ref={ref}
+                            className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-neutral-900 sm:rounded-3xl overflow-hidden"
+                        >
+                            <motion.div layoutId={`image-${activeCard.title}-${id}`}>
+                                <img
+                                    src={activeCard.imageUrl}
+                                    alt={activeCard.title}
+                                    className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
+                                />
+                            </motion.div>
+
+                            <div>
+                                <div className="flex justify-between items-start p-4">
+                                    <div className="">
+                                        <motion.h3
+                                            layoutId={`title-${activeCard.title}-${id}`}
+                                            className="font-bold text-neutral-200"
+                                        >
+                                            {activeCard.title}
+                                        </motion.h3>
+                                        <motion.p
+                                            layoutId={`description-${activeCard.issuer}-${id}`}
+                                            className="text-neutral-400"
+                                        >
+                                            {activeCard.issuer}
+                                        </motion.p>
+                                    </div>
+
+                                    <motion.button
+                                        layoutId={`button-${activeCard.title}-${id}`}
+                                        onClick={() => setActive(null)}
+                                        className="px-6 py-2 text-sm rounded-full font-bold bg-green-500 hover:bg-green-600 text-white"
+                                    >
+                                        Tutup
+                                    </motion.button>
+                                </div>
+                                <div className="pt-4 relative px-4">
+                                    <motion.div
+                                        layout
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        className="text-neutral-400 text-xs md:text-sm lg:text-base h-auto pb-4 flex flex-col items-start gap-4 overflow-auto [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                                    >
+                                        {certContent[activeCard.id] ?? <p>Sertifikat ini diraih atas penghargaan {activeCard.title}.</p>}
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
         </>,
         document.body
     );
