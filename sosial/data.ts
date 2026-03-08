@@ -175,6 +175,7 @@ const portfolioData: PortfolioData = {
         { id: 'nav-projects', label: 'Projects', href: '#projects' },
         { id: 'nav-skills', label: 'Skills', href: '#skills' },
         { id: 'nav-certificates', label: 'Certificates', href: '#certificates' },
+        { id: 'nav-github', label: 'GitHub', href: '#github' },
         { id: 'nav-contact', label: 'Contact', href: '#contact' },
     ],
 };

@@ -9,6 +9,7 @@ import Projects from '@/components/sections/Projects';
 import Skills from '@/components/sections/Skills';
 import Certificates from '@/components/sections/Certificates';
 import Contact from '@/components/sections/Contact';
+import GitHubSection from '@/components/sections/GitHubSection';
 import CountUp from '@/components/reactbits/CountUp';
 import GradientText from '@/components/reactbits/GradientText';
 
@@ -83,6 +84,7 @@ function App() {
         <Projects projects={projects} />
         <Skills />
         <Certificates certificates={certificates} />
+        <GitHubSection />
         <Contact personal={personal} />
       </main>
 
