@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { GitHubCalendar } from 'react-github-calendar';
 import { Star, GitFork, Users, BookOpen } from 'lucide-react';
 import SplitText from '@/components/reactbits/SplitText';
+import CardSwap, { Card } from '@/components/reactbits/CardSwap';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,8 +83,8 @@ const calendarTheme = {
   light: ['#0d0d1a', '#2d1b69', '#5b21b6', '#7c3aed', '#a78bfa'],
 };
 
-// ── Stats Card ────────────────────────────────────────────────────────────────
-const StatsCard: React.FC<{ user: GitHubUser | null; repos: GitHubRepo[]; loading: boolean }> = ({
+// ── Stats Card Content ────────────────────────────────────────────────────────
+const StatsCardContent: React.FC<{ user: GitHubUser | null; repos: GitHubRepo[]; loading: boolean }> = ({
   user,
   repos,
   loading,
@@ -99,33 +100,33 @@ const StatsCard: React.FC<{ user: GitHubUser | null; repos: GitHubRepo[]; loadin
   ];
 
   return (
-    <div className="stat-card opacity-0 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(139,92,246,0.12)]">
-      <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-4">GitHub Stats</p>
+    <>
+      <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-4 text-left w-full block">GitHub Stats</p>
       {loading ? (
-        <div className="space-y-3">
+        <div className="space-y-3 w-full">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-8 rounded-lg bg-white/5 animate-pulse" />
+            <div key={i} className="h-8 rounded-lg bg-white/5 animate-pulse w-full" />
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4 w-full">
           {items.map((item) => (
-            <div key={item.label} className="flex flex-col gap-1">
+            <div key={item.label} className="flex flex-col gap-1 items-start">
               <div className="flex items-center gap-1.5 text-text-muted">
                 <span className="text-accent/70">{item.icon}</span>
                 <span className="text-[11px]">{item.label}</span>
               </div>
-              <span className="text-text-primary font-display font-bold text-xl">{item.value}</span>
+              <span className="text-text-primary font-display font-bold text-2xl">{item.value}</span>
             </div>
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
-// ── Top Languages Card ────────────────────────────────────────────────────────
-const TopLangsCard: React.FC<{ repos: GitHubRepo[]; loading: boolean }> = ({ repos, loading }) => {
+// ── Top Languages Card Content ────────────────────────────────────────────────
+const TopLangsCardContent: React.FC<{ repos: GitHubRepo[]; loading: boolean }> = ({ repos, loading }) => {
   const ownRepos = repos.filter((r) => !r.fork && r.language);
   const langCount: Record<string, number> = {};
   for (const repo of ownRepos) {
@@ -138,20 +139,20 @@ const TopLangsCard: React.FC<{ repos: GitHubRepo[]; loading: boolean }> = ({ rep
     .slice(0, 6);
 
   return (
-    <div className="stat-card opacity-0 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-6 transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(139,92,246,0.12)]">
-      <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-4">Top Languages</p>
+    <>
+      <p className="text-accent text-xs font-semibold tracking-widest uppercase mb-4 text-left w-full block">Top Languages</p>
       {loading ? (
-        <div className="space-y-3">
+        <div className="space-y-3 w-full">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-6 rounded-lg bg-white/5 animate-pulse" />
+            <div key={i} className="h-6 rounded-lg bg-white/5 animate-pulse w-full" />
           ))}
         </div>
       ) : sorted.length === 0 ? (
-        <p className="text-text-muted text-sm">No public repos found</p>
+        <p className="text-text-muted text-sm w-full block text-left">No public repos found</p>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-4 w-full block text-left mt-2">
           {/* Color bar */}
-          <div className="flex rounded-full overflow-hidden h-2 gap-0.5">
+          <div className="flex rounded-full overflow-hidden h-2.5 gap-0.5 w-full">
             {sorted.map(([lang, count]) => (
               <div
                 key={lang}
@@ -164,15 +165,15 @@ const TopLangsCard: React.FC<{ repos: GitHubRepo[]; loading: boolean }> = ({ rep
             ))}
           </div>
           {/* Language list */}
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2 pt-1">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-3 pt-2 w-full text-left">
             {sorted.map(([lang, count]) => (
               <div key={lang} className="flex items-center gap-2">
                 <span
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  className="w-3 h-3 rounded-full flex-shrink-0"
                   style={{ backgroundColor: LANG_COLORS[lang] ?? '#8b5cf6' }}
                 />
-                <span className="text-text-secondary text-xs truncate">{lang}</span>
-                <span className="text-text-muted text-xs ml-auto">
+                <span className="text-text-secondary text-sm truncate">{lang}</span>
+                <span className="text-text-muted text-sm ml-auto">
                   {Math.round((count / total) * 100)}%
                 </span>
               </div>
@@ -180,7 +181,7 @@ const TopLangsCard: React.FC<{ repos: GitHubRepo[]; loading: boolean }> = ({ rep
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
@@ -196,14 +197,13 @@ const GitHubSection: React.FC = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        statsRef.current?.querySelectorAll('.stat-card') ?? [],
+        statsRef.current,
         { opacity: 0, y: 40, scale: 0.96 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
           duration: 0.7,
-          stagger: 0.15,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: statsRef.current,
@@ -284,27 +284,43 @@ const GitHubSection: React.FC = () => {
           </p>
         </div>
 
-        {/* ── Stats Cards (3 columns) ── */}
+        {/* ── Stats Cards (CardSwap) ── */}
         <div
           ref={statsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-14"
+          className="opacity-0 mb-10 xl:mb-14 flex justify-center w-full px-2 sm:px-0"
         >
-          {/* Card 1: GitHub Stats (real API) */}
-          <StatsCard user={user} repos={repos} loading={loading} />
+          <div className="w-full max-w-[280px] sm:max-w-sm md:max-w-md" style={{ height: '320px', position: 'relative' }}>
+            <CardSwap
+              cardDistance={40}
+              verticalDistance={30}
+              delay={5000}
+              pauseOnHover={false}
+              width="100%"
+              height={260}
+              containerClassName="absolute inset-0 perspective-[900px] origin-center scale-[0.9] sm:scale-100"
+            >
+              {/* Card 1: GitHub Stats (real API) */}
+              <Card customClass="p-6 sm:p-8 flex flex-col justify-center bg-[#0d0d1a] border-white/10 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+                <StatsCardContent user={user} repos={repos} loading={loading} />
+              </Card>
 
-          {/* Card 2: Streak (image — still working) */}
-          <div className="stat-card opacity-0 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-3 sm:p-4 overflow-hidden transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(139,92,246,0.12)]">
-            <img
-              src={`https://github-readme-streak-stats.herokuapp.com/?user=${GITHUB_USERNAME}&theme=tokyonight&background=0d0d1a&border=8b5cf6&stroke=8b5cf6&ring=a78bfa&fire=a78bfa&currStreakNum=f0f0f5&sideNums=f0f0f5&currStreakLabel=8b5cf6&sideLabels=8b5cf6&dates=9898a6`}
-              alt="GitHub Streak"
-              loading="lazy"
-              className="w-full h-auto object-contain rounded-lg"
-              style={{ minHeight: '120px' }}
-            />
+              {/* Card 2: Streak (image) */}
+              <Card customClass="p-4 sm:p-6 overflow-hidden flex items-center justify-center bg-[#0d0d1a] border-white/10 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+                <img
+                  src={`https://github-readme-streak-stats.herokuapp.com/?user=${GITHUB_USERNAME}&theme=tokyonight&background=0d0d1a&border=8b5cf6&stroke=8b5cf6&ring=a78bfa&fire=a78bfa&currStreakNum=f0f0f5&sideNums=f0f0f5&currStreakLabel=8b5cf6&sideLabels=8b5cf6&dates=9898a6`}
+                  alt="GitHub Streak"
+                  loading="lazy"
+                  className="w-full h-auto object-contain rounded-lg"
+                  style={{ minHeight: '120px' }}
+                />
+              </Card>
+
+              {/* Card 3: Top Languages (real API) */}
+              <Card customClass="p-6 sm:p-8 flex flex-col justify-center bg-[#0d0d1a] border-white/10 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+                <TopLangsCardContent repos={repos} loading={loading} />
+              </Card>
+            </CardSwap>
           </div>
-
-          {/* Card 3: Top Languages (real API) */}
-          <TopLangsCard repos={repos} loading={loading} />
         </div>
 
         {/* ── Contribution Calendar ── */}
