@@ -6,6 +6,7 @@ import type { PortfolioData } from '../src/types';
 // ─────────────────────────────────────────────
 
 import profileImage from './porto profil.jpeg';
+import hmtiImage from './hmti.png';
 
 const portfolioData: PortfolioData = {
     personal: {
@@ -140,7 +141,7 @@ const portfolioData: PortfolioData = {
                 </div>
             `,
             techStack: ['Laravel', 'PHP', 'Blade', 'MySQL', 'Tailwind CSS', 'Vite'],
-            imageUrl: '/sosial/hmti.png',
+            imageUrl: hmtiImage,
             repoUrl: 'https://github.com/Sutannn13/HMTI-Margonda.git',
             featured: true,
             category: 'Organization Website',
