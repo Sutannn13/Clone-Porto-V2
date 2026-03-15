@@ -164,10 +164,9 @@ const Hero: React.FC<HeroProps> = ({ personal }) => {
                         />
                     </a>
                     <a
-                        href="/sosial/CV SUTAN ARLIE.pdf"
+                        href="/sosial/CV Sutan Arlie Baru.pdf"
                         id="cta-download-cv"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        download="CV Sutan Arlie.pdf"
                         className="group inline-flex items-center gap-2 rounded-full border border-border px-7 py-3 text-sm font-semibold text-text-secondary transition-all duration-300 hover:border-accent/40 hover:text-text-primary"
                     >
                         <Download
