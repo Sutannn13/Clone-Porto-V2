@@ -8,6 +8,7 @@ import About from '@/components/sections/About';
 import Projects from '@/components/sections/Projects';
 import Skills from '@/components/sections/Skills';
 import Certificates from '@/components/sections/Certificates';
+import Blog from '@/components/sections/Blog';
 import Contact from '@/components/sections/Contact';
 import Experience from '@/components/sections/Experience';
 import GitHubSection from '@/components/sections/GitHubSection';
@@ -20,7 +21,7 @@ import GradientText from '@/components/reactbits/GradientText';
 import portfolioData from '../sosial/data';
 
 function App() {
-  const { personal, projects, certificates, experiences, navigation } = portfolioData;
+  const { personal, projects, certificates, experiences, navigation, blogPosts } = portfolioData;
   const [showIntro, setShowIntro] = useState(true);
   const [introFading, setIntroFading] = useState(false);
 
@@ -86,6 +87,7 @@ function App() {
         <Projects projects={projects} />
         <Skills />
         <Certificates certificates={certificates} />
+        <Blog blogPosts={blogPosts} />
         <GitHubSection />
         <Contact personal={personal} />
       </main>

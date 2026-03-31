@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 import type { NavItem } from '@/types';
+import GradientText from '@/components/ui/GradientText';
 
 interface NavbarProps {
     items: NavItem[];
@@ -56,13 +57,19 @@ const Navbar: React.FC<NavbarProps> = ({ items }) => {
                 {/* Logo */}
                 <a
                     href="#home"
-                    className="font-display text-lg font-bold tracking-tight text-text-primary transition-colors hover:text-accent"
                     onClick={(e) => {
                         e.preventDefault();
                         handleNavClick('#home');
                     }}
                 >
-                    SA<span className="text-accent">.</span>
+                    <GradientText
+                        colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+                        animationSpeed={10}
+                        showBorder={false}
+                        className="font-display text-2xl font-bold tracking-tight"
+                    >
+                        SA.
+                    </GradientText>
                 </a>
 
                 {/* Desktop Nav */}

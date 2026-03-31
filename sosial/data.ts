@@ -150,6 +150,21 @@ const portfolioData: PortfolioData = {
 
     experiences: [
         {
+            id: 'e0',
+            role: 'Backend Engineer Intern',
+            company: 'Connextion',
+            location: 'Indonesia (Remote)',
+            startDate: 'Mar 2026',
+            endDate: 'Present',
+            description:
+                'Currently working as a Backend Engineer Intern at Connextion (connextion.tech), helping aspiring founders build market-ready products by developing scalable backend architectures and API integrations.',
+            highlights: [
+                'Set up and configured Firebase and Google Authentication for secure user access.',
+                "Designed and implemented the database schema for the platform's questionnaire responses.",
+                'Developed and integrated REST APIs connecting the frontend questionnaire forms with the backend system.',
+            ],
+        },
+        {
             id: 'e1',
             role: 'Peneliti & Pengembang Aplikasi',
             company: 'Universitas Bina Sarana Informatika, Project Base',
@@ -230,6 +245,114 @@ const portfolioData: PortfolioData = {
         },
     ],
 
+    blogPosts: [
+        {
+            id: 'blog-1',
+            slug: 'tugas-perorangan-1-iot',
+            title: 'Dari M2M Menuju Internet of Things: Evolusi, Struktur, dan Arsitektur Referensi ITU-T Y.2060',
+            subtitle: 'Tugas Perorangan #1 — Membahas materi Pertemuan 1 s/d 3 mata kuliah Internet of Things (IoT)',
+            date: '2026-03-31',
+            author: 'Sutan Arlie Johan',
+            course: 'Internet of Things (IoT) — Kode MK: 0246',
+            assignment: 'Tugas Perorangan #1',
+            coverIcon: '🌐',
+            tags: ['IoT', 'M2M', 'ITU-T Y.2060', 'Arsitektur IoT', 'Sensor', 'AI', 'Edge Computing'],
+            tableOfContents: [
+                'Pendahuluan',
+                'Pertemuan 1 — Machine-to-Machine (M2M) Communication',
+                'Pertemuan 2 — Perspektif, Rantai, dan Struktur IoT',
+                'Pertemuan 3 — Arsitektur, Prinsip, dan Fungsi IoT',
+                'Kesimpulan dan Refleksi',
+                'Referensi',
+            ],
+            sections: [
+                {
+                    id: 's-intro',
+                    heading: 'Pendahuluan',
+                    body: 'Internet of Things (IoT) merupakan sebuah paradigma teknologi yang memperluas manfaat konektivitas internet secara terus-menerus ke benda-benda fisik di dunia nyata. Konsep ini memungkinkan perangkat — mulai dari sensor mungil hingga mesin industri — untuk saling berkomunikasi, berbagi data, dan bahkan mengambil keputusan secara otonom melalui jaringan digital. Dalam dekade terakhir, IoT telah berevolusi dari sekadar komunikasi Machine-to-Machine (M2M) yang terbatas, menjadi sebuah ekosistem cerdas yang mencakup kecerdasan buatan, edge computing, dan arsitektur berlapis yang terstandarisasi oleh badan internasional seperti ITU-T.\n\nTulisan ini disusun sebagai pemenuhan Tugas Perorangan #1 mata kuliah Internet of Things (IoT), Universitas Bina Sarana Informatika. Materi yang dibahas mencakup tiga pertemuan awal: (1) definisi dan perkembangan M2M Communication, (2) perspektif, rantai, dan struktur IoT, serta (3) arsitektur, prinsip, dan fungsi IoT berdasarkan model referensi ITU-T Y.2060. Pembahasan dilakukan secara akademis, mengacu pada sumber referensi utama yang digunakan dalam perkuliahan.',
+                },
+                {
+                    id: 's-m2m',
+                    heading: 'Pertemuan 1 — Machine-to-Machine (M2M) Communication',
+                    body: 'Machine-to-Machine (M2M) adalah teknologi yang memungkinkan perangkat saling berkomunikasi dan bertukar data secara otomatis tanpa intervensi manusia. Menurut Holler et al. (2014), M2M merupakan fondasi awal dari ekosistem IoT — di mana dua atau lebih mesin terhubung melalui jaringan IP, SMS, atau saluran komunikasi nirkabel lainnya untuk memberikan layanan dengan campur tangan manusia yang minimal.\n\nSecara teknis, M2M beroperasi melalui berbagai jenis koneksi: short-range (Wi-Fi, Zigbee, Ethernet), Powerline Communication (PLC), satellite, maupun fixed network (PSTN, ISDN, DSL, fiber, dan cable). Contoh klasik implementasi M2M adalah teknologi RFID, di mana sensor dapat berkomunikasi langsung dengan kendaraan yang memiliki transponder khusus — komunikasi terjadi secara instan saat kedua perangkat bertemu, tanpa adanya perintah manual dari manusia.',
+                    bullets: [
+                        'Transportasi — Pelacakan kendaraan dan aset secara real-time, komunikasi vehicle-to-infrastructure (V2I) untuk menentukan rute alternatif, serta navigasi kendaraan darurat seperti ambulans dan pemadam kebakaran.',
+                        'Keamanan — Sistem pengawasan jarak jauh (remote surveillance) dan early warning system terhadap ancaman kriminalitas maupun kebakaran, baik di lingkungan residensial maupun industri.',
+                        'Kesehatan — Remote patient monitoring yang memungkinkan pasien mendapat pengawasan medis kontinu dari rumah. Jika terjadi perubahan negatif pada kondisi tubuh, staf kesehatan dapat segera memberikan pertolongan tanpa pasien harus berada di rumah sakit.',
+                        'Otomotif — Diagnosis kendaraan jarak jauh (remote vehicle diagnostics) yang memperingatkan pengendara terhadap potensi kerusakan mesin beserta solusi yang tersedia.',
+                    ],
+                },
+                {
+                    id: 's-m2m-to-iot',
+                    heading: 'Evolusi M2M Menuju IoT',
+                    body: 'Perbedaan fundamental antara M2M dan IoT terletak pada skala dan orientasinya. M2M berfokus pada komunikasi point-to-point antar dua mesin spesifik menggunakan saluran komunikasi yang terbatas, sementara IoT memperluas konsep ini ke skala jaringan internet global — menghubungkan miliaran perangkat heterogen ke dalam satu ekosistem yang terintegrasi.\n\nMenurut materi perkuliahan, M2M dan IoT sama-sama mendigitalisasikan proses kerja menggunakan teknologi yang menghubungkan perangkat melalui jaringan IP agar dapat dimonitor dan dikontrol secara efisien. Namun, IoT menambahkan dimensi interoperabilitas antar-perangkat yang lebih luas, pengolahan data berbasis cloud, serta kemampuan analitik dan kecerdasan buatan yang adaptif. Solusi layanan M2M/IoT untuk mendukung proses bisnis mencakup: Building & Infrastructure Automation (Smart Building, Smart Home, Smart Office, Smart Lighting, dan Smart Water), Custom IoT Solution, dan M2M/IoT Network Monitoring.',
+                },
+                {
+                    id: 's-structure',
+                    heading: 'Pertemuan 2 — Perspektif, Rantai, dan Struktur IoT',
+                    body: 'IoT diprediksi menjadi bagian tak terpisahkan dari kehidupan manusia di masa mendatang. Berdasarkan materi perkuliahan, terdapat empat perspektif utama implementasi IoT secara garis besar:',
+                    bullets: [
+                        'Smart Connectivity — Koneksi terhadap perangkat dalam kondisi bergerak (mobile), khususnya hubungan antara smartphone dengan kendaraan, rumah sakit, perkantoran, atau perangkat lainnya.',
+                        'Intelligent Building — Pengawasan dan kontrol terhadap gedung serta perumahan untuk efisiensi energi dan keamanan, misalnya kontrol jarak jauh terhadap AC, kulkas, dan lampu listrik.',
+                        'Smart City — Pengaturan dan pengelolaan perkotaan seperti pengaturan trafik lalu lintas, sistem keamanan kota, dan pemantauan energi.',
+                        'Agricultural IoT — Pemanfaatan IoT di sektor peternakan dan pertanian pada wilayah rural, seperti pemantauan kondisi hewan ternak dan pertumbuhan tanaman.',
+                    ],
+                },
+                {
+                    id: 's-elements',
+                    heading: 'Unsur-Unsur Pembentuk IoT',
+                    body: 'Menurut materi perkuliahan yang mengacu pada daCosta (2013) dan Holler et al. (2014), terdapat empat unsur pembentuk IoT yang mendasar:',
+                    bullets: [
+                        'Kecerdasan Buatan (Artificial Intelligence/AI) — IoT membuat hampir semua mesin menjadi "smart" melalui pengumpulan data, algoritma AI, dan jaringan yang tersedia. Contoh sederhana: kulkas cerdas yang mendeteksi stok bahan kebutuhan yang menipis dan secara otomatis membuat pesanan ke supermarket.',
+                        'Konektivitas — IoT memungkinkan penciptaan jaringan baru yang tidak harus berskala besar dan mahal. Jaringan dapat tersedia pada skala kecil dan murah di antara perangkat-perangkat dalam sistem.',
+                        'Sensor — Komponen pembeda yang membuat IoT unik. Sensor mengubah jaringan standar yang cenderung pasif menjadi sistem aktif yang mampu diintegrasikan ke dunia nyata, mendefinisikan instrumen pengumpulan data secara real-time.',
+                        'Perangkat Berukuran Kecil — Seiring perkembangan teknologi, perangkat menjadi semakin kecil, murah, dan powerful. IoT memanfaatkan perangkat-perangkat mikro ini untuk menghasilkan ketepatan, skalabilitas, dan fleksibilitas yang optimal.',
+                    ],
+                },
+                {
+                    id: 's-iot-chain',
+                    heading: 'Rantai M2M dan IoT',
+                    body: 'Perkembangan teknologi koneksi data seluler telah mengubah lanskap penggunaan internet secara fundamental. Koneksi data tidak lagi terbatas untuk browsing, streaming video, atau komunikasi media sosial — tetapi kini mampu menghubungkan perangkat-perangkat yang sebelumnya terisolasi.\n\nDalam konsep smart home misalnya, perangkat keamanan, lampu, dan kulkas yang berada di rumah dapat dioperasikan dan dipantau melalui handphone dari lokasi yang terpisah. Keterlibatan aktif (Active Engagement) juga menjadi paradigma baru: berbeda dengan teknologi konvensional yang bersifat pasif, IoT mengenalkan konten aktif, produk aktif, dan keterlibatan layanan yang responsif terhadap kondisi real-time.',
+                },
+                {
+                    id: 's-architecture',
+                    heading: 'Pertemuan 3 — Arsitektur, Prinsip, dan Fungsi IoT',
+                    body: 'Internet of Things (IoT) merupakan pengembangan terbaru dari revolusi komunikasi dan komputasi. IoT mengacu pada interkoneksi perangkat cerdas yang mencakup berbagai macam perkakas hingga sensor-sensor mungil, yang umumnya terhubung melalui sistem cloud. McKinsey Global Institute memperkirakan IoT memiliki dampak ekonomi potensial sebesar $3,9–11,1 triliun per tahun pada tahun 2025.\n\nTelecommunication Standardization Sector of the International Telecommunication Union (ITU-T) telah mempublikasikan Recommendation Y.2060 berjudul "Overview of the Internet of Things" yang menyediakan definisi dan cakupan IoT secara komprehensif. Dimensi baru yang diperkenalkan oleh IoT adalah komunikasi "any THING communication" — di mana komunikasi tidak lagi terbatas pada antar-manusia atau manusia-ke-mesin, tetapi juga mencakup komunikasi apa pun antar benda.',
+                },
+                {
+                    id: 's-itu-t',
+                    heading: 'Model Referensi ITU-T Y.2060 (4 Layer)',
+                    body: 'Model referensi IoT yang didefinisikan dalam Recommendation Y.2060 menjelaskan komponen fisik pada ekosistem IoT secara detail. Aspek unik IoT adalah adanya perangkat dan benda-benda fisik dalam jumlah yang sangat besar, selain perangkat komputasi dan pemrosesan datanya. Model ini terdiri dari empat layer fungsional:',
+                    bullets: [
+                        'Layer 1 — Device Layer: Terdiri dari sensor, aktuator, dan perangkat fisik yang berinteraksi langsung dengan lingkungan. Sensor mengumpulkan data dari benda fisik, sementara aktuator melakukan aksi (menghidupkan/mematikan lampu, membuka/menutup pintu, dll). Data-capturing devices berinteraksi dengan benda fisik melalui data-carrying devices (label RFID aktif) atau data carriers (barkode, QR code). General devices memiliki kemampuan komunikasi dan pemrosesan data, misalnya mesin industri, perkakas listrik rumah, dan ponsel cerdas.',
+                        'Layer 2 — Network Layer: Menyediakan konektivitas dan transportasi data antar perangkat. Gateway berfungsi sebagai penerjemah protokol antar-perangkat yang mendukung berbagai jenis teknologi transmisi kabel dan nirkabel. Gateway juga berfungsi sebagai agen IoT yang mendukung interaksi antar-aplikasi, manajemen jaringan, dan fungsi keamanan.',
+                        'Layer 3 — Edge/Fog Computing Layer: Karakteristik pembeda IoT dengan teknologi lainnya. Istilah "fog" (kabut) terinspirasi dari fakta bahwa kabut melayang rendah mendekati tanah, sedangkan "cloud" (awan) berada tinggi di langit. Tujuan edge computing adalah mengubah aliran data mentah menjadi informasi yang cocok untuk disimpan dan diproses di tingkat yang lebih tinggi. Operasi edge computing meliputi: evaluasi data, reformatting, summarization, dan reduksi data. Contohnya: sebuah pesawat dapat menghasilkan lebih dari satu terabyte data per jam — memproses data sedekat mungkin dengan sensor lebih efisien daripada menyimpan seluruhnya secara permanen.',
+                        'Layer 4 — Application/Service Layer: Lapisan teratas yang menyediakan layanan dan aplikasi IoT kepada pengguna. Layer ini mencakup data analytics, machine learning models, dan user applications yang memungkinkan monitoring dan kontrol terhadap perangkat-perangkat cerdas.',
+                    ],
+                },
+                {
+                    id: 's-design',
+                    heading: 'Prinsip Desain IoT',
+                    body: 'Berdasarkan konsep yang dipublikasikan dalam "Designing the Internet of Things" (McEwen & Cassimally, 2014), elemen-elemen IoT dapat diringkaskan dalam persamaan sederhana:\n\nPhysical Objects + Controllers, Sensors, Actuators + Internet = IoT\n\nPersamaan ini menegaskan bahwa IoT pada dasarnya adalah konvergensi tiga komponen fundamental: benda fisik yang ada di dunia nyata, perangkat kontrol dan sensor yang memberikan "indera" digital kepada benda-benda tersebut, serta konektivitas internet yang memungkinkan data mengalir dan keputusan diambil secara terdistribusi.\n\nTeknologi yang digunakan untuk interaksi antara data-capturing devices dan data-carrying devices meliputi frekuensi radio, inframerah, optikal, dan galvanic driving. Contoh galvanic driving: perangkat kesehatan yang diimplantasikan ke tubuh manusia berkomunikasi dengan memanfaatkan sifat konduktif tubuh ke elektroda pada kulit.',
+                },
+                {
+                    id: 's-conclusion',
+                    heading: 'Kesimpulan dan Refleksi',
+                    body: 'Dari pembahasan tiga pertemuan awal mata kuliah IoT, dapat disimpulkan bahwa Internet of Things merupakan evolusi natural dari komunikasi Machine-to-Machine (M2M) yang telah ada sebelumnya. M2M menyediakan fondasi berupa koneksi point-to-point antar mesin, yang kemudian diperluas oleh IoT menjadi ekosistem global yang menghubungkan miliaran perangkat heterogen melalui internet.\n\nStruktur IoT ditopang oleh empat unsur fundamental: kecerdasan buatan (AI) yang memberikan kemampuan "berpikir" kepada mesin, konektivitas yang fleksibel dan terjangkau, sensor yang mengubah perangkat pasif menjadi sistem aktif, serta miniaturisasi perangkat yang memungkinkan deployment massal. Arsitektur IoT terstandarisasi melalui model referensi ITU-T Y.2060 yang terdiri dari empat layer fungsional: Device, Network, Edge/Fog Computing, dan Application/Service Layer.\n\nDi masa depan, sebagaimana perspektif yang disampaikan dalam perkuliahan, IoT akan menjadi bagian integral dari kehidupan manusia — dari smart home, intelligent building, smart city, hingga agricultural IoT. Pemahaman mendalam terhadap fondasi teknis ini menjadi prasyarat bagi setiap praktisi teknologi untuk berkontribusi dalam ekosistem IoT yang semakin berkembang.',
+                },
+            ],
+            references: [
+                'Holler, J., Tsiatsis, V., Mulligan, C., Avesand, S., Karnouskos, S., & Boyle, D. (2014). From Machine-to-Machine to the Internet of Things: Introduction to a New Age of Intelligence (7th ed.). Elsevier.',
+                'daCosta, F. (2013). Rethinking the Internet of Things: A Scalable Approach to Connecting Everything. Apress Open.',
+                'Lynggaard, P. (2014). Artificial Intelligence and Internet of Things in a "Smart Home" Context. Aalborg University, Denmark.',
+                'ITU-T Recommendation Y.2060 (2012). Overview of the Internet of Things. International Telecommunication Union.',
+                'McEwen, A., & Cassimally, H. (2014). Designing the Internet of Things. John Wiley & Sons.',
+                'McKinsey Global Institute (2015). The Internet of Things: Mapping the Value Beyond the Hype. McKinsey & Company.',
+                'Vanderminden (2016). Data Flow Concepts in Internet of Things — Referensi aliran informasi dan manajemen transmisi data IoT.',
+            ],
+        },
+    ],
+
     navigation: [
         { id: 'nav-home', label: 'Home', href: '#home' },
         { id: 'nav-about', label: 'About', href: '#about' },
@@ -237,6 +360,7 @@ const portfolioData: PortfolioData = {
         { id: 'nav-projects', label: 'Projects', href: '#projects' },
         { id: 'nav-skills', label: 'Skills', href: '#skills' },
         { id: 'nav-certificates', label: 'Certificates', href: '#certificates' },
+        { id: 'nav-blog', label: 'Blog', href: '#blog' },
         { id: 'nav-github', label: 'GitHub', href: '#github' },
         { id: 'nav-contact', label: 'Contact', href: '#contact' },
     ],

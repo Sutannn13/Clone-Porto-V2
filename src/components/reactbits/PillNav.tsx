@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
+import GradientText from '@/components/ui/GradientText';
 
 // ─────────────────────────────────────────────
 // PillNav — Adapted from React Bits
@@ -277,15 +278,21 @@ const PillNav: React.FC<PillNavProps> = ({
                     href="#home"
                     ref={logoRef}
                     onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
-                    className="rounded-full inline-flex items-center justify-center overflow-hidden font-display font-bold text-text-primary no-underline"
+                    className="rounded-full inline-flex items-center justify-center overflow-hidden font-display font-bold no-underline"
                     style={{
                         width: 'var(--nav-h)',
                         height: 'var(--nav-h)',
                         background: 'transparent',
-                        fontSize: '16px',
                     }}
                 >
-                    SA<span style={{ color: '#8b5cf6' }}>.</span>
+                    <GradientText
+                        colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+                        animationSpeed={2}
+                        showBorder={false}
+                        className="text-[16px]"
+                    >
+                        SA.
+                    </GradientText>
                 </a>
 
                 {/* Desktop Pills */}

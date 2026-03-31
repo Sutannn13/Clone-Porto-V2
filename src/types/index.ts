@@ -72,6 +72,29 @@ export interface Certificate {
     credentialUrl?: string;
 }
 
+export interface BlogSection {
+    id: string;
+    heading: string;
+    body: string;
+    bullets?: string[];
+}
+
+export interface BlogPost {
+    id: string;
+    slug: string;
+    title: string;
+    subtitle: string;
+    date: string;
+    author: string;
+    course: string;
+    assignment: string;
+    coverIcon: string;
+    tags: string[];
+    tableOfContents: string[];
+    sections: BlogSection[];
+    references: string[];
+}
+
 export interface NavItem {
     id: string;
     label: string;
@@ -85,5 +108,6 @@ export interface PortfolioData {
     projects: Project[];
     experiences: Experience[];
     certificates: Certificate[];
+    blogPosts: BlogPost[];
     navigation: NavItem[];
 }
