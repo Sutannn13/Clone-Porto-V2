@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import RotatingText from '@/components/reactbits/RotatingText';
-import SplitText from '@/components/reactbits/SplitText';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 import Lanyard from '@/components/reactbits/Lanyard';
 import type { PersonalInfo } from '@/types';
 
@@ -91,22 +91,17 @@ const About: React.FC<AboutProps> = ({ personal }) => {
                             />
                         </h2>
 
-                        <SplitText
-                            text={personal.bio}
-                            className="mb-6 text-base leading-relaxed text-text-secondary"
-                            delay={5}
-                            duration={1}
-                            ease="none"
-                            from={{ opacity: 0.2 }}
-                            to={{ opacity: 1 }}
-                            splitType="chars"
-                            textAlign="left"
-                            threshold={0.1}
-                            rootMargin="-10% 0px"
-                            once={false}
-                            scrub={0.5} // Makes it smooth and links play/reverse directly to scroll
-                            end="bottom 60%" // Ends animation when text reaches 60% down the screen
-                        />
+                        <ScrollReveal
+                            baseOpacity={0.4}
+                            enableBlur={true}
+                            baseRotation={3}
+                            blurStrength={3}
+                            containerClassName="mb-6"
+                            textClassName="text-base leading-relaxed text-text-secondary"
+                            wordAnimationEnd="bottom 80%"
+                        >
+                            {personal.bio}
+                        </ScrollReveal>
 
                         <div className="flex flex-wrap gap-3">
                             {['React', 'TypeScript', 'Laravel', 'MikroTik', 'Cisco'].map(
