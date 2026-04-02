@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Aurora from '@/components/reactbits/Aurora';
 import PillNav from '@/components/reactbits/PillNav';
 import Footer from '@/components/layout/Footer';
@@ -12,8 +12,7 @@ import Blog from '@/components/sections/Blog';
 import Contact from '@/components/sections/Contact';
 import Experience from '@/components/sections/Experience';
 import GitHubSection from '@/components/sections/GitHubSection';
-import CountUp from '@/components/reactbits/CountUp';
-import GradientText from '@/components/reactbits/GradientText';
+import BlurText from '@/components/reactbits/BlurText';
 
 // ─────────────────────────────────────────────
 // Data import from the isolated `sosial` folder
@@ -24,6 +23,20 @@ function App() {
   const { personal, projects, certificates, experiences, navigation, blogPosts } = portfolioData;
   const [showIntro, setShowIntro] = useState(true);
   const [introFading, setIntroFading] = useState(false);
+
+  useEffect(() => {
+    if (!showIntro) {
+      return;
+    }
+
+    const fadeTimer = window.setTimeout(() => setIntroFading(true), 2300);
+    const hideTimer = window.setTimeout(() => setShowIntro(false), 3000);
+
+    return () => {
+      window.clearTimeout(fadeTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, [showIntro]);
 
   // Convert NavItem[] to PillNav format
   const pillNavItems = navigation.map((item) => ({
@@ -39,23 +52,20 @@ function App() {
           className={`fixed inset-0 z-[9999] flex items-center justify-center bg-[#050010] transition-all duration-1000 ease-in-out ${introFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
         >
-          <div className="flex items-end space-x-1">
-            <GradientText
-              colors={['#8b5cf6', '#B19EEF', '#5227FF', '#8b5cf6']}
-              className="text-6xl md:text-8xl font-display font-bold leading-none inline-block pb-2"
-              animationSpeed={3}
-            >
-              <CountUp
-                from={0}
-                to={100}
-                duration={5}
-                onEnd={() => {
-                  setIntroFading(true);
-                  setTimeout(() => setShowIntro(false), 1000);
-                }}
-              />
-            </GradientText>
-            <span className="text-[#B19EEF] text-2xl md:text-4xl font-display font-bold mb-3 md:mb-5">%</span>
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute left-1/2 top-1/3 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-400/20 blur-[120px]" />
+            <div className="absolute right-[10%] bottom-1/4 h-64 w-64 rounded-full bg-blue-500/15 blur-[120px]" />
+          </div>
+
+          <div className="relative z-10 px-6 text-center">
+            <BlurText
+              text="Welcome to Johan Portofolio"
+              delay={470}
+              animateBy="words"
+              direction="top"
+              stepDuration={0.4}
+              className="justify-center font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-cyan-100 drop-shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+            />
           </div>
         </div>
       )}

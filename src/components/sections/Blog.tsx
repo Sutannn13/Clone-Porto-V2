@@ -35,7 +35,7 @@ const BlogCover: React.FC<{ onClick: () => void }> = ({ onClick }) => (
                     Masuk ke Blog Akademis
                 </h3>
                 <p className="text-sm sm:text-base text-neutral-400 leading-relaxed mb-6">
-                    Baca tulisan lengkap mengenai evolusi Machine-to-Machine, arsitektur Internet of Things, model referensi ITU-T, dan penyelesaian studi kasus secara komprehensif.
+                    Baca kumpulan tulisan lengkap materi IoT dari Pertemuan 1-3 dan 4-6, mulai dari evolusi M2M, perangkat keras dan gateway, hingga model referensi arsitektur dan keamanan IoT.
                 </p>
                 
                 {/* CTA */}
