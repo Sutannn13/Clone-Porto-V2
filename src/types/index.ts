@@ -79,6 +79,14 @@ export interface BlogSection {
     bullets?: string[];
 }
 
+export type BlogReferenceProof = 'jurnal' | 'sinta' | 'standar' | 'laporan' | 'buku' | 'lainnya';
+
+export interface BlogReference {
+    text: string;
+    url?: string;
+    proof?: BlogReferenceProof;
+}
+
 export interface BlogPost {
     id: string;
     slug: string;
@@ -92,7 +100,7 @@ export interface BlogPost {
     tags: string[];
     tableOfContents: string[];
     sections: BlogSection[];
-    references: string[];
+    references: Array<string | BlogReference>;
 }
 
 export interface NavItem {

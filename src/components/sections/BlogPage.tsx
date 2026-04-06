@@ -9,7 +9,7 @@ import Beams from '@/components/reactbits/Beams';
 import PillNav from '@/components/reactbits/PillNav';
 import BlurText from '@/components/reactbits/BlurText';
 import Shuffle from '@/components/reactbits/Shuffle';
-import type { BlogPost } from '@/types';
+import type { BlogPost, BlogReference } from '@/types';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,6 +23,37 @@ const pillNavItems = [
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
 ];
+
+const referenceProofLabel: Record<NonNullable<BlogReference['proof']>, string> = {
+    jurnal: 'Jurnal',
+    sinta: 'SINTA',
+    standar: 'Standar',
+    laporan: 'Laporan',
+    buku: 'Buku',
+    lainnya: 'Lainnya',
+};
+
+const referenceUrlRegex = /(https?:\/\/[^\s]+)/i;
+
+const normalizeReference = (ref: BlogPost['references'][number]) => {
+    if (typeof ref !== 'string') {
+        return {
+            text: ref.text,
+            url: ref.url,
+            proof: ref.proof,
+        };
+    }
+
+    const matchedUrl = ref.match(referenceUrlRegex);
+    if (!matchedUrl) {
+        return { text: ref };
+    }
+
+    return {
+        text: ref.replace(matchedUrl[0], '').trim(),
+        url: matchedUrl[0],
+    };
+};
 
 // ─────────────────────────────────────────────
 // Blog Card Component (Grid Preview)
@@ -254,12 +285,35 @@ const BlogDetail: React.FC<{ post: BlogPost; onClose: () => void; }> = ({ post, 
                                         <h2 className="font-display text-lg sm:text-xl lg:text-2xl font-bold text-white pt-0.5">Referensi</h2>
                                     </div>
                                     <ol className="space-y-3 pl-10 sm:pl-11 list-none">
-                                        {post.references.map((ref, rIdx) => (
+                                        {post.references.map((ref, rIdx) => {
+                                            const normalizedReference = normalizeReference(ref);
+                                            const proofLabel = normalizedReference.proof ? referenceProofLabel[normalizedReference.proof] : null;
+
+                                            return (
                                             <li key={rIdx} className="flex items-start gap-3 text-xs sm:text-sm text-neutral-400 leading-relaxed">
                                                 <span className="shrink-0 font-mono text-[10px] text-accent/50 mt-1 w-5 text-right">[{rIdx + 1}]</span>
-                                                <span className="italic">{ref}</span>
+                                                <div className="min-w-0">
+                                                    {normalizedReference.url ? (
+                                                        <a
+                                                            href={normalizedReference.url}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="italic text-cyan-300 underline decoration-cyan-400/60 underline-offset-2 transition-colors duration-300 hover:text-cyan-200"
+                                                        >
+                                                            {normalizedReference.text}
+                                                        </a>
+                                                    ) : (
+                                                        <span className="italic">{normalizedReference.text}</span>
+                                                    )}
+                                                    {proofLabel && (
+                                                        <span className="ml-2 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-2 py-0.5 text-[10px] font-mono tracking-wide text-cyan-200">
+                                                            {proofLabel}
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </li>
-                                        ))}
+                                            );
+                                        })}
                                     </ol>
                                 </section>
                             </div>

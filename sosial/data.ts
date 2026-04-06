@@ -342,13 +342,46 @@ const portfolioData: PortfolioData = {
                 },
             ],
             references: [
-                'Holler, J., Tsiatsis, V., Mulligan, C., Avesand, S., Karnouskos, S., & Boyle, D. (2014). From Machine-to-Machine to the Internet of Things: Introduction to a New Age of Intelligence (7th ed.). Elsevier.',
-                'daCosta, F. (2013). Rethinking the Internet of Things: A Scalable Approach to Connecting Everything. Apress Open.',
-                'Lynggaard, P. (2014). Artificial Intelligence and Internet of Things in a "Smart Home" Context. Aalborg University, Denmark.',
-                'ITU-T Recommendation Y.2060 (2012). Overview of the Internet of Things. International Telecommunication Union.',
-                'McEwen, A., & Cassimally, H. (2014). Designing the Internet of Things. John Wiley & Sons.',
-                'McKinsey Global Institute (2015). The Internet of Things: Mapping the Value Beyond the Hype. McKinsey & Company.',
-                'Vanderminden (2016). Data Flow Concepts in Internet of Things — Referensi aliran informasi dan manajemen transmisi data IoT.',
+                {
+                    text: 'Empowering Strawberry Cultivation: Harnessing the Potential of IoT-Based Technology in Smart Farming (JITK, terindeks SINTA & Google Scholar).',
+                    url: 'https://ejournal.nusamandiri.ac.id/index.php/jitk/article/view/4162',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Implementation of IoT-Based Presence Applications in Junior High Schools to Support Smart Schools (JITK, terindeks SINTA & Google Scholar).',
+                    url: 'https://ejournal.nusamandiri.ac.id/index.php/jitk/article/view/4119',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Deep Learning dengan Teknik Early Stopping untuk Mendeteksi Malware pada Perangkat IoT (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/8267',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'LSTM-IOT (LSTM-based IoT) untuk Mengatasi Kehilangan Data Akibat Kegagalan Koneksi (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/9157',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Sistem Monitoring Budidaya Melon Melalui Greenhouse Berbasis Internet Of Things (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/9164',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Pembuka Kunci Pintu Ruang Isolasi Mandiri Menggunakan Suhu Tubuh Dengan Notifikasi Foto Menggunakan Konsep IoT (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/8759',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'A Comparative Study of HTTP and MQTT for IoT Applications in Hydroponics (Jurnal RESTI, terindeks SINTA & Google Scholar).',
+                    url: 'https://jurnal.iaii.or.id/index.php/RESTI/article/view/5561',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Predicting Smart Office Electricity Consumption in Response to Weather Conditions Using Deep Learning (Jurnal RESTI, terindeks SINTA & Google Scholar).',
+                    url: 'https://jurnal.iaii.or.id/index.php/RESTI/article/view/5530',
+                    proof: 'jurnal',
+                },
             ],
         },
         {
@@ -423,12 +456,41 @@ const portfolioData: PortfolioData = {
                 },
             ],
             references: [
-                'Materi Kuliah Internet of Things (IoT) UBSI. Dokumen: IOT (1)_merged.pdf, bagian Pertemuan 4, Pertemuan 5, dan Pertemuan 6.',
-                'Vanderminden. (2016). Data Flow Concepts in Internet of Things.',
-                'ETSI. (2014). Network Functions Virtualisation (NFV): Introductory White Paper.',
-                'ITU-T Recommendation Y.2060. (2012). Overview of the Internet of Things. International Telecommunication Union.',
-                'IETF. (2015). RFC 7452: Architectural Considerations in Smart Object Networking.',
-                'ISO/IEC 30141. (2018). Internet of Things (IoT) - Reference Architecture.',
+                {
+                    text: 'A Comparative Study of HTTP and MQTT for IoT Applications in Hydroponics (Jurnal RESTI, terindeks SINTA & Google Scholar).',
+                    url: 'https://jurnal.iaii.or.id/index.php/RESTI/article/view/5561',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Deep Learning dengan Teknik Early Stopping untuk Mendeteksi Malware pada Perangkat IoT (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/8267',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'LSTM-IOT (LSTM-based IoT) untuk Mengatasi Kehilangan Data Akibat Kegagalan Koneksi (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/9157',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Pembuka Kunci Pintu Ruang Isolasi Mandiri Menggunakan Suhu Tubuh Dengan Notifikasi Foto Menggunakan Konsep IoT (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/8759',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Sistem Monitoring Budidaya Melon Melalui Greenhouse Berbasis Internet Of Things (JTIIK, terindeks SINTA & Google Scholar).',
+                    url: 'https://jtiik.ub.ac.id/index.php/jtiik/article/view/9164',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Empowering Strawberry Cultivation: Harnessing the Potential of IoT-Based Technology in Smart Farming (JITK, terindeks SINTA & Google Scholar).',
+                    url: 'https://ejournal.nusamandiri.ac.id/index.php/jitk/article/view/4162',
+                    proof: 'jurnal',
+                },
+                {
+                    text: 'Implementation of IoT-Based Presence Applications in Junior High Schools to Support Smart Schools (JITK, terindeks SINTA & Google Scholar).',
+                    url: 'https://ejournal.nusamandiri.ac.id/index.php/jitk/article/view/4119',
+                    proof: 'jurnal',
+                },
             ],
         },
     ],
